@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajeng Tyas Putri, S.Farm. | Portofolio Farmasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-soft-pink: #FFF5F7; 
+            --primary-pink: #FF1493; 
+            --secondary-pink: #FF69B4; 
+            --accent-pink: #C71585; 
+            --text-dark: #1A1A1A;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(to bottom, #FFF5F7, #FFFBFC, #FFF5F7);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Elemen Latar Belakang - Jumlah Seimbang & Jelas */
+        .bg-pill {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.25; 
+            animation: float-random 20s ease-in-out infinite;
+        }
+
+        @keyframes float-random {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(15deg); }
+            66% { transform: translate(-20px, 40px) rotate(-10deg); }
+        }
+
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-text.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--primary-pink);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-pink); }
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 3px solid var(--primary-pink);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.05);
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-pink);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-pink);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .pink-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 2px solid var(--secondary-pink);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 10;
+        }
+
+        .pink-card:hover {
+            border-color: var(--primary-pink);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 20, 147, 0.12);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-pink);
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .section-title {
+            color: var(--accent-pink);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: var(--secondary-pink);
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--secondary-pink);
+            padding: 8px 20px;
+            border-radius: 99px;
+            font-weight: 700;
+            color: var(--accent-pink);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .consult-input {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #fee2e2;
+            transition: all 0.3s;
+        }
+
+        .consult-input:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 4px rgba(255, 20, 147, 0.1);
+            outline: none;
+        }
+
+        .emoji-float {
+            position: absolute;
+            font-size: 2.5rem;
+            z-index: 20;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        section {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Latar Belakang Emoji Tersebar Seimbang -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none" id="emoji-background">
+        <!-- Emoji via JS -->
+    </div>
+
+    <!-- 1. HEADER -->
+    <header class="fixed w-full top-0 z-50 glass-header">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter text-pink-600">
+                AJENG<span class="text-pink-400">TYAS.</span> 💊
+            </div>
+
+            <div class="hidden md:flex items-center space-x-10">
+                <a href="#home" class="nav-link uppercase tracking-wider">Beranda</a>
+                <a href="#about" class="nav-link uppercase tracking-wider">Tentang</a>
+                <a href="#skills" class="nav-link uppercase tracking-wider">Keahlian</a>
+                <a href="#portfolio" class="nav-link uppercase tracking-wider">Portofolio</a>
+                <a href="#consultation" class="nav-link uppercase tracking-wider text-pink-600">Konsultasi</a>
+            </div>
+
+            <div class="hidden md:block">
+                <a href="#consultation" class="btn-primary px-8 py-3 rounded-xl shadow-lg inline-block uppercase text-xs tracking-widest">
+                    Tanya Obat ✨
+                </a>
+            </div>
+
+            <button class="md:hidden text-pink-600 p-2" id="mobile-menu-btn">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 2. BERANDA (HERO) -->
+    <section id="home" class="relative min-h-screen pt-40 pb-20 px-6 flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
+            <div>
+                <div class="inline-block bg-pink-600 text-white px-5 py-2 rounded-lg font-black text-xs mb-6 uppercase tracking-widest shadow-md reveal-text">
+                    Professional Pharmacist 🩺
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black text-gray-900 mb-6 leading-tight reveal-text">
+                    Ajeng Tyas Putri, <span class="italic text-pink-600">S.Farm.</span>
+                </h1>
+                <div class="max-w-fit mb-10">
+                   <p class="text-xl text-gray-800 leading-relaxed font-medium typewriter">
+                       Dedikasi untuk keselamatan pasien ✨
+                   </p>
+                </div>
+                <div class="flex flex-wrap gap-5 reveal-text">
+                    <a href="#portfolio" class="btn-primary px-10 py-5 rounded-2xl font-black shadow-xl text-center text-lg">
+                        Lihat Portofolio 📁
+                    </a>
+                    <a href="#consultation" class="border-4 border-pink-600 text-pink-600 px-10 py-5 rounded-2xl font-black hover:bg-white transition-all text-center text-lg">
+                        Konsultasi Online 📱
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center items-center reveal-text">
+                <span class="emoji-float top-0 left-0 floating" style="animation-delay: 0s;">💊</span>
+                <span class="emoji-float bottom-10 right-0 floating" style="animation-delay: 1s;">✨</span>
+                <span class="emoji-float top-20 right-10 floating" style="animation-delay: 0.5s;">🧪</span>
+                <span class="emoji-float bottom-20 left-10 floating" style="animation-delay: 1.5s;">🩺</span>
+                
+                <div class="relative z-10">
+                    <div class="w-80 h-80 md:w-[450px] md:h-[450px] rounded-[60px] bg-gradient-to-br from-pink-400 to-pink-700 floating shadow-2xl overflow-hidden border-[12px] border-white flex items-center justify-center">
+                        <!-- SISIPKAN FOTO PROFIL ANDA DI BAWAH INI (Bagian src="") -->
+                        <img src=""C:\Users\ASUS\Downloads\WhatsApp Image 2026-01-29 at 21.14.03.jpeg"" alt="blob:https://web.whatsapp.com/f5f32fd2-dcf2-4ac5-ae99-0ecca6de18b8" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TENTANG & ORGANISASI -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal-text">
+                    <h2 class="text-5xl font-black section-title mb-12">Tentang Saya 🧪</h2>
+                    <div class="bg-white/90 backdrop-filter backdrop-blur-sm p-10 rounded-[40px] border-l-8 border-pink-600 shadow-sm mb-8">
+                        <p class="text-xl text-gray-700 leading-relaxed font-medium">
+                            Sebagai lulusan <strong>Universitas Padjadjaran</strong> 🎓, saya berkomitmen untuk memberikan layanan farmasi yang berpusat pada pasien. Saya percaya bahwa edukasi obat adalah kunci utama kesehatan masyarakat. 💊
+                        </p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="p-6 pink-card flex-1 text-center">
+                            <h4 class="font-black text-pink-600 uppercase text-xs tracking-widest mb-1">Almamater</h4>
+                            <p class="font-bold text-gray-800">UNPAD 🏫</p>
+                        </div>
+                        <div class="p-6 pink-card flex-1 text-center">
+                            <h4 class="font-black text-pink-600 uppercase text-xs tracking-widest mb-1">Gelar</h4>
+                            <p class="font-bold text-gray-800">S.Farm. 📜</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-text">
+                    <h2 class="text-5xl font-black section-title mb-12">Organisasi 🤝</h2>
+                    <div class="space-y-6">
+                        <div class="bg-white/90 p-6 rounded-3xl border-2 border-pink-100 hover:border-pink-500 transition-all shadow-sm">
+                            <h3 class="font-black text-pink-700 text-xl">Himpunan Mahasiswa Farmasi UNPAD 🏛️</h3>
+                            <p class="text-gray-500 font-bold text-sm mb-2 italic">Divisi Edukasi & Pengabdian</p>
+                            <p class="text-gray-600">Mengelola program penyuluhan kesehatan masyarakat mengenai bahaya resistensi antibiotik. 🦠</p>
+                        </div>
+                        <div class="bg-white/90 p-6 rounded-3xl border-2 border-pink-100 hover:border-pink-500 transition-all shadow-sm">
+                            <h3 class="font-black text-pink-700 text-xl">ISMAFARSI 🌏</h3>
+                            <p class="text-gray-500 font-bold text-sm mb-2 italic">Koordinator Wilayah</p>
+                            <p class="text-gray-600">Mengoordinasikan kegiatan advokasi profesi farmasis tingkat mahasiswa secara regional. 📢</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. KEAHLIAN -->
+    <section id="skills" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto reveal-text">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-black section-title">Keahlian Utama ⚡</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-10 pink-card text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="flask-conical" class="text-pink-600 w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">Farmasi Klinis</h3>
+                    <p class="text-gray-600 font-medium">Analisis interaksi obat, peninjauan resep, dan konseling pasien profesional. 🩺</p>
+                </div>
+                <div class="p-10 pink-card text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="message-circle" class="text-pink-600 w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">Edukasi & Konseling</h3>
+                    <p class="text-gray-600 font-medium">Komunikasi terapeutik untuk menjelaskan aturan pakai obat secara mudah. 📢</p>
+                </div>
+                <div class="p-10 pink-card text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="clipboard-list" class="text-pink-600 w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">Manajemen Obat</h3>
+                    <p class="text-gray-600 font-medium">Pengelolaan stok obat, penyimpanan rantai dingin, dan logistik farmasi. 📦</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PORTOFOLIO -->
+    <section id="portfolio" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 reveal-text">
+                <h2 class="text-5xl font-black section-title">Karya & Proyek 🎨</h2>
+            </div>
+            <div class="max-w-4xl mx-auto reveal-text">
+                <div class="group pink-card overflow-hidden shadow-2xl bg-white/90">
+                    <div class="h-80 bg-pink-200 overflow-hidden relative">
+                        <!-- SISIPKAN GAMBAR PROYEK/POSTER EDUKASI ANDA DI BAWAH INI (Bagian src="") -->
+                        <img src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&q=80&w=1000" alt="[Gambar Edukasi Visual]" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-12 text-center">
+                        <h3 class="text-3xl font-black text-gray-800 mb-4">Edukasi Penggunaan Obat Aman 🛡️</h3>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed font-medium">
+                            Kampanye visual edukatif untuk meminimalisir kesalahan penggunaan antibiotik. ⚠️
+                        </p>
+                        <a href="#" class="btn-primary px-10 py-4 rounded-xl inline-flex items-center gap-3">
+                            Detail <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. KONSULTASI ONLINE -->
+    <section id="consultation" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto reveal-text">
+                <div class="pink-card p-10 shadow-2xl bg-white/95 border-4 border-pink-50">
+                    <h2 class="text-3xl font-black text-center mb-8 text-pink-600">Konsultasi Obat 📱</h2>
+                    <form class="space-y-6">
+                        <input type="text" placeholder="Nama Anda 😊" class="w-full consult-input rounded-2xl p-4 font-bold">
+                        <textarea rows="4" placeholder="Pertanyaan obat Anda... ✍️" class="w-full consult-input rounded-2xl p-4 font-bold"></textarea>
+                        <button type="submit" class="w-full btn-primary py-5 rounded-2xl font-black text-xl shadow-lg">Kirim Pesan ✨</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. KONTAK -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-pink-600 rounded-[60px] p-12 md:p-24 text-white flex flex-col md:flex-row gap-16 items-center shadow-xl relative overflow-hidden reveal-text">
+                <div class="md:w-1/2 relative z-10">
+                    <h2 class="text-5xl font-black mb-8 leading-tight">Mari Terhubung! 👋</h2>
+                    <div class="space-y-6">
+                        <p class="text-xl font-bold">ajengtyasputri@gmail.com ✉️</p>
+                        <p class="text-xl font-bold">@ajengtys.putrii_ 📸</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="py-20 bg-white/70 border-t-4 border-pink-200 relative z-10 text-center">
+        <div class="text-3xl font-black text-pink-600 mb-4 uppercase tracking-tighter">AJENG TYAS PUTRI, S.Farm.</div>
+        <div class="text-gray-500 font-bold text-[10px]">
+            &copy; 2024 Portofolio Farmasi | Universitas Padjadjaran 🏫
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Generate Random Background Emojis - Jumlah Dikurangi & Seimbang
+        const emojiContainer = document.getElementById('emoji-background');
+        const emojis = ['💊', '🧪', '🧬', '🩹', '🩺', '✨'];
+        const emojiCount = 35; 
+
+        for (let i = 0; i < emojiCount; i++) {
+            const emojiEl = document.createElement('div');
+            emojiEl.className = 'bg-pill';
+            emojiEl.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const size = 1.5 + Math.random() * 1.5;
+            const delay = Math.random() * 10;
+            const duration = 15 + Math.random() * 15;
+
+            emojiEl.style.top = `${top}%`;
+            emojiEl.style.left = `${left}%`;
+            emojiEl.style.fontSize = `${size}rem`;
+            emojiEl.style.animationDelay = `-${delay}s`;
+            emojiEl.style.animationDuration = `${duration}s`;
+            
+            emojiContainer.appendChild(emojiEl);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-text').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
