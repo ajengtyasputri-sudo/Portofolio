@@ -1,1448 +1,433 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jelajahi keindahan curug-curug tersembunyi di Subang - Destinasi wisata alam yang memukau">
-  <meta name="keywords" content="wisata subang, curug subang, air terjun subang, destinasi wisata">
-  <title>Explore Subang Waterfalls - Destinasi Wisata Alam</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/_sdk/data_sdk.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-  <style>
-    body {
-      box-sizing: border-box;
-    }
-    
-    * {
-      font-family: 'Poppins', sans-serif;
-    }
-    
-    .font-playfair {
-      font-family: 'Playfair Display', serif;
-    }
-    
-    .hero-gradient {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    .card-shadow {
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-    
-    .parallax-bg {
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .fade-in-up {
-      animation: fadeInUp 0.8s ease-out;
-    }
-    
-    .nav-link {
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background-color: currentColor;
-      transition: width 0.3s ease;
-    }
-    
-    .nav-link:hover::after {
-      width: 100%;
-    }
-    
-    .chatbot-bubble {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 1000;
-    }
-    
-    .rating-star {
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-    
-    .rating-star:hover {
-      color: #fbbf24;
-    }
-    
-    .weather-widget {
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.9);
-    }
-    
-    .dark .weather-widget {
-      background: rgba(31, 41, 55, 0.9);
-    }
-    
-    .testimonial-card {
-      min-height: 200px;
-    }
-    
-    @media (max-width: 768px) {
-      .mobile-menu {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-      }
-      
-      .mobile-menu.active {
-        max-height: 500px;
-      }
-    }
-  </style>
-  <style>@view-transition { navigation: auto; }</style>
- </head>
- <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300"><!-- Header / Navbar -->
-  <header class="fixed w-full top-0 z-50 bg-white dark:bg-gray-800 shadow-md transition-colors duration-300">
-   <nav class="container mx-auto px-6 py-4">
-    <div class="flex justify-between items-center">
-     <div class="flex items-center space-x-2"><span class="text-3xl">🌿</span> <span class="text-2xl font-playfair font-bold text-gray-800 dark:text-white">Explore Subang</span>
-     </div><!-- Desktop Menu -->
-     <div class="hidden md:flex items-center space-x-8"><a href="#beranda" class="nav-link text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Beranda</a> <a href="#tentang" class="nav-link text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Tentang</a> <a href="#destinasi" class="nav-link text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Destinasi</a> <a href="#galeri" class="nav-link text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Galeri</a> <a href="#tiket" class="nav-link text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Tiket</a> <a href="#kontak" class="nav-link text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400">Kontak</a> <!-- Language Switcher --> <select id="languageSwitcher" class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white px-3 py-1 rounded-lg text-sm"> <option value="id">🇮🇩 ID</option> <option value="en">🇬🇧 EN</option> </select> <!-- Dark Mode Toggle --> <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition"> <span class="dark:hidden">🌙</span> <span class="hidden dark:inline">☀️</span> </button>
-     </div><!-- Mobile Menu Button --> <button id="mobileMenuToggle" class="md:hidden text-gray-700 dark:text-gray-300">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg></button>
-    </div><!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu md:hidden mt-4">
-     <div class="flex flex-col space-y-4 pb-4"><a href="#beranda" class="text-gray-700 dark:text-gray-300 hover:text-green-600">Beranda</a> <a href="#tentang" class="text-gray-700 dark:text-gray-300 hover:text-green-600">Tentang</a> <a href="#destinasi" class="text-gray-700 dark:text-gray-300 hover:text-green-600">Destinasi</a> <a href="#galeri" class="text-gray-700 dark:text-gray-300 hover:text-green-600">Galeri</a> <a href="#tiket" class="text-gray-700 dark:text-gray-300 hover:text-green-600">Tiket</a> <a href="#kontak" class="text-gray-700 dark:text-gray-300 hover:text-green-600">Kontak</a>
-      <div class="flex items-center space-x-4"><select class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white px-3 py-1 rounded-lg text-sm flex-1"> <option value="id">🇮🇩 Indonesia</option> <option value="en">🇬🇧 English</option> </select> <button class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700"> <span class="dark:hidden">🌙</span> <span class="hidden dark:inline">☀️</span> </button>
-      </div>
-     </div>
-    </div>
-   </nav>
-  </header><!-- Hero Section -->
-  <section id="beranda" class="relative pt-20 min-h-screen flex items-center justify-center overflow-hidden">
-   <div class="absolute inset-0 hero-gradient opacity-90"></div>
-   <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTIwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMjAgMjBjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
-   <div class="container mx-auto px-6 relative z-10 text-center text-white fade-in-up">
-    <h1 id="heroTitle" class="text-5xl md:text-7xl font-playfair font-bold mb-6 leading-tight">Jelajahi Surga Tersembunyi di Subang</h1><!-- Weather Widget -->
-    <div class="weather-widget inline-flex items-center space-x-3 px-6 py-3 rounded-full mb-6"><span class="text-3xl">⛅</span>
-     <div class="text-left">
-      <div class="font-semibold text-gray-800 dark:text-white">
-       Subang, Jawa Barat
-      </div>
-      <div class="text-sm text-gray-600 dark:text-gray-300">
-       28°C • Cerah Berawan
-      </div>
-     </div>
-    </div>
-    <p id="heroSubtitle" class="text-xl md:text-2xl mb-8 font-light max-w-3xl mx-auto">Temukan keindahan air terjun yang memukau di tengah hutan tropis Indonesia</p><!-- Search Bar -->
-    <div class="max-w-2xl mx-auto mb-8">
-     <div class="relative"><input type="text" id="searchInput" placeholder="🔍 Cari destinasi, tips wisata, atau informasi..." class="w-full px-6 py-4 rounded-full text-gray-800 shadow-lg focus:outline-none focus:ring-4 focus:ring-green-300">
-     </div>
-     <div id="searchResults" class="mt-4 text-left bg-white dark:bg-gray-800 rounded-2xl shadow-lg hidden"></div>
-    </div>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center"><a href="#destinasi" class="bg-white text-green-600 px-8 py-4 rounded-full font-semibold hover:bg-green-50 transition transform hover:scale-105 shadow-lg"> Explore Destinasi ✨ </a> <a href="#tiket" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-600 transition transform hover:scale-105"> Pesan Tiket 🎫 </a>
-    </div><!-- Counter / Statistics -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6">
-      <div class="text-4xl font-bold font-playfair">
-       8+
-      </div>
-      <div class="text-sm mt-2">
-       Destinasi Curug
-      </div>
-     </div>
-     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6">
-      <div class="text-4xl font-bold font-playfair" id="visitorCount">
-       12.5K+
-      </div>
-      <div class="text-sm mt-2">
-       Pengunjung/Tahun
-      </div>
-     </div>
-     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6">
-      <div class="text-4xl font-bold font-playfair">
-       4.8⭐
-      </div>
-      <div class="text-sm mt-2">
-       Rating Pengunjung
-      </div>
-     </div>
-     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6">
-      <div class="text-4xl font-bold font-playfair">
-       24/7
-      </div>
-      <div class="text-sm mt-2">
-       Layanan Info
-      </div>
-     </div>
-    </div>
-   </div><!-- Scroll Down Indicator -->
-   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-    </svg>
-   </div>
-  </section><!-- Highlight 3 Curug -->
-  <section id="destinasi" class="py-20 transition-colors duration-300" style="background: linear-gradient(180deg, #764ba2 0%, #667eea 100%);">
-   <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-     <h2 class="text-4xl md:text-5xl font-playfair font-bold text-white mb-4">Destinasi Utama</h2>
-     <p class="text-white text-lg max-w-2xl mx-auto">Tiga permata tersembunyi yang wajib Anda kunjungi</p>
-    </div><!-- Filter Destinasi -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12"><button class="filter-btn active px-6 py-2 rounded-full bg-yellow-400 text-gray-900 font-bold hover:bg-yellow-300 transition shadow-lg" data-filter="all"> Semua Destinasi </button> <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-900 font-bold hover:bg-yellow-400 hover:text-gray-900 transition shadow-lg" data-filter="keluarga"> Cocok Keluarga 👨‍👩‍👧‍👦 </button> <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-900 font-bold hover:bg-yellow-400 hover:text-gray-900 transition shadow-lg" data-filter="petualangan"> Petualangan 🏔️ </button> <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-900 font-bold hover:bg-yellow-400 hover:text-gray-900 transition shadow-lg" data-filter="relaksasi"> Relaksasi 🧘 </button>
-    </div>
-    <div class="grid md:grid-cols-3 gap-8" id="destinationCards"><!-- ===================================== --> <!-- Card 1: Curug Cibareubeuy --> <!-- ===================================== -->
-     <div class="destination-card card-shadow rounded-3xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-700" data-category="relaksasi"><!-- 📸 TARUH FOTO DI SINI (Curug Cibareubeuy) --> <!-- Hapus kode SVG di bawah, lalu ganti dengan: --> <!-- <img src="https://URL-FOTO-CIBAREUBEUY-ANDA.jpg" alt="Curug Cibareubeuy" class="w-full h-64 object-cover"> -->
-      <div class="relative h-64 bg-gradient-to-br from-green-400 to-green-600 overflow-hidden">
-       <img src="https://www.pergidulu.com/wp-content/uploads/2022/02/Curug-Cibareubeuy-Bandung-Utara.jpeg" alt="Curug Cibareubeuy" class="w-full h-64 object-cover"> -->
-         <lineargradient id="water1" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
-         </lineargradient>
-        </defs> <rect fill="url(#water1)" width="400" height="300" /> <path d="M0,150 Q100,120 200,150 T400,150 L400,300 L0,300 Z" fill="#047857" opacity="0.5" /> <circle cx="200" cy="80" r="40" fill="white" opacity="0.3" /> <path d="M180,100 L200,140 L220,100" stroke="white" stroke-width="3" fill="none" opacity="0.6" /> <path d="M160,120 L200,160 L240,120" stroke="white" stroke-width="3" fill="none" opacity="0.5" />
-       </svg>
-       <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-sm font-semibold text-green-600">
-        ⭐ 4.9
-       </div>
-      </div>
-      <div class="p-6">
-       <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-2">Curug Cibareubeuy</h3>
-       <p class="text-gray-600 dark:text-gray-400 mb-4">Hening &amp; Asri — Sempurna untuk meditasi dan relaksasi</p>
-       <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-4"><span>📍 15 km dari kota</span> <span>⏱️ 30 menit</span>
-       </div>
-       <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs">Mudah</span> <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs">Air Jernih</span> <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-xs">Tenang</span>
-       </div><button onclick="showDestinationDetail('cibareubeuy')" class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition font-semibold"> Lihat Detail ✨ </button>
-      </div>
-     </div><!-- ===================================== --> <!-- Card 2: Curug Cileat --> <!-- ===================================== -->
-     <div class="destination-card card-shadow rounded-3xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-700" data-category="petualangan"><!-- 📸 TARUH FOTO DI SINI (Curug Cileat) --> <!-- Hapus kode SVG di bawah, lalu ganti dengan: --> <!-- img <src="https://URL-FOTO-CILEAT-ANDA.jpg" alt="Curug Cileat" class="w-full h-64 object-cover"> -->
-      <div class="relative h-64 bg-gradient-to-br from-blue-400 to-blue-600 overflow-hidden">
-       <img src="https://subang.go.id/public/storage/backend/images/wisata/Curug-Cileat_105359.jpg" alt="Curug Cileat" class="w-full h-64 object-cover">
-         <lineargradient id="water2" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
-         </lineargradient>
-        </defs> <rect fill="url(#water2)" width="400" height="300" /> <polygon points="100,250 150,180 200,250" fill="#1e3a8a" opacity="0.6" /> <polygon points="250,250 300,160 350,250" fill="#1e40af" opacity="0.6" /> <path d="M180,80 L200,180 L220,80" stroke="white" stroke-width="4" fill="none" opacity="0.8" /> <path d="M160,100 L200,200 L240,100" stroke="white" stroke-width="4" fill="none" opacity="0.6" /> <circle cx="200" cy="60" r="30" fill="white" opacity="0.2" />
-       </svg>
-       <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-sm font-semibold text-blue-600">
-        ⭐ 4.8
-       </div>
-      </div>
-      <div class="p-6">
-       <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-2">Curug Cileat</h3>
-       <p class="text-gray-600 dark:text-gray-400 mb-4">Megah &amp; Menantang — Ketinggian 75 meter yang spektakuler</p>
-       <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-4"><span>📍 22 km dari kota</span> <span>⏱️ 1 jam</span>
-       </div>
-       <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded-full text-xs">Menantang</span> <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-xs">Trekking</span> <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-xs">Foto Epic</span>
-       </div><button onclick="showDestinationDetail('cileat')" class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition font-semibold"> Lihat Detail ✨ </button>
-      </div>
-     </div><!-- ===================================== --> <!-- Card 3: Curug Capolaga --> <!-- ===================================== -->
-     <div class="destination-card card-shadow rounded-3xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-700" data-category="keluarga"><!-- 📸 TARUH FOTO DI SINI (Curug Capolaga) --> <!-- Hapus kode SVG di bawah, lalu ganti dengan: --> <!-- <img src="https://URL-FOTO-CAPOLAGA-ANDA.jpg" alt="Curug Capolaga" class="w-full h-64 object-cover"> -->
-      <div class="relative h-64 bg-gradient-to-br from-purple-400 to-pink-500 overflow-hidden">
-       <img src="data:image/jpeg;base64,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" alt="Curug Capolaga" class="w-full h-64 object-cover">
-         <lineargradient id="water3" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-         </lineargradient>
-        </defs> <rect fill="url(#water3)" width="400" height="300" /> <ellipse cx="200" cy="200" rx="150" ry="80" fill="#9333ea" opacity="0.4" /> <path d="M180,120 L200,180 L220,120" stroke="white" stroke-width="3" fill="none" opacity="0.7" /> <path d="M160,140 L200,200 L240,140" stroke="white" stroke-width="3" fill="none" opacity="0.5" /> <circle cx="120" cy="100" r="20" fill="white" opacity="0.3" /> <circle cx="280" cy="120" r="25" fill="white" opacity="0.3" /> <path d="M0,220 Q100,200 200,220 T400,220 L400,300 L0,300 Z" fill="#7c3aed" opacity="0.5" />
-       </svg>
-       <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-sm font-semibold text-purple-600">
-        ⭐ 4.7
-       </div>
-      </div>
-      <div class="p-6">
-       <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-2">Curug Capolaga</h3>
-       <p class="text-gray-600 dark:text-gray-400 mb-4">Fun untuk Keluarga — Area camping dan piknik yang nyaman</p>
-       <div class="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-4"><span>📍 18 km dari kota</span> <span>⏱️ 45 menit</span>
-       </div>
-       <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs">Keluarga</span> <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 rounded-full text-xs">Camping</span> <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 rounded-full text-xs">Fasilitas Lengkap</span>
-       </div><button onclick="showDestinationDetail('capolaga')" class="w-full bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 transition font-semibold"> Lihat Detail ✨ </button>
-      </div>
-     </div>
-    </div>
-   </div>
-  </section><!-- Destination Detail Modal -->
-  <div id="destinationModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-   <div class="bg-white dark:bg-gray-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-    <div class="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex justify-between items-center">
-     <h3 id="modalTitle" class="text-3xl font-playfair font-bold text-gray-800 dark:text-white"></h3><button onclick="closeDestinationModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"> ✕ </button>
-    </div>
-    <div id="modalContent" class="p-6"></div>
-   </div>
-  </div><!-- Galeri Section -->
-  <section id="galeri" class="py-20 transition-colors duration-300" style="background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);">
-   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="font-playfair text-4xl md:text-5xl font-bold text-center mb-4 scroll-animate">Galeri Destinasi</h2>
-    <p class="text-center text-black-600 mb-12 scroll-animate">Koleksi foto menakjubkan dari setiap destinasi</p>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4"><!-- Gallery Item 1 -->
-     <div class="gallery-item rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate" style="height: 250px;"><img src="https://backpackerjakarta.com/wp-content/uploads/2016/10/Curug-Cibareubeuy-Subang.jpg" alt="Pemandangan Curug Cibareubeuy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover">
-      <div class="w-full h-full bg-gradient-to-br from-green-300 to-green-600 flex items-center justify-center" style="display: flex;"><span class="text-white text-6xl">🏞️</span>
-      </div>
-     </div><!-- Gallery Item 2 -->
-     <div class="gallery-item rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate" style="height: 250px;"><img src="https://liburanyuk.co.id/wp-content/uploads/2021/07/@kaleng_suram999-819x1024.jpg" alt="Air terjun Curug Cileat" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover">
-      <div class="w-full h-full bg-gradient-to-br from-blue-300 to-blue-600 flex items-center justify-center" style="display: flex;"><span class="text-white text-6xl">💧</span>
-      </div>
-     </div><!-- Gallery Item 3 -->
-     <div class="gallery-item rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate" style="height: 250px;"><img src="https://cdn1.katadata.co.id/media/images/temp/2021/11/17/Curug_Cileat_di_Subang-2021_11_17-17_07_11_1af9b9ea97205014fa6702d41ed9c8bc.jpg" alt="Hutan tropis sekitar air terjun" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover">
-      <div class="w-full h-full bg-gradient-to-br from-teal-300 to-teal-600 flex items-center justify-center" style="display: flex;"><span class="text-white text-6xl">🌿</span>
-      </div>
-     </div><!-- Gallery Item 4 -->
-     <div class="gallery-item rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate" style="height: 250px;"><img src="data:image/jpeg;base64,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" alt="Flora dan fauna di sekitar curug" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover">
-      <div class="w-full h-full bg-gradient-to-br from-cyan-300 to-cyan-600 flex items-center justify-center" style="display: flex;"><span class="text-white text-6xl">🦋</span>
-      </div>
-     </div><!-- Gallery Item 5 -->
-     <div class="gallery-item rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate" style="height: 250px;"><img src="https://media.sukabumiupdate.com/media/2025/02/28/1740714545_67c132314be72_Ggtu8jm3Mv4xeSxKZ72T.webp" alt="Aliran air jernih Curug Capolaga" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover">
-      <div class="w-full h-full bg-gradient-to-br from-emerald-300 to-emerald-600 flex items-center justify-center" style="display: flex;"><span class="text-white text-6xl">🌊</span>
-      </div>
-     </div><!-- Gallery Item 6 -->
-     <div class="gallery-item rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate" style="height: 250px;"><img src="https://getlost.id/wp-content/uploads/2021/04/@ary_is_mail.jpg" alt="Pegunungan di sekitar Subang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="w-full h-full object-cover">
-      <div class="w-full h-full bg-gradient-to-br from-lime-300 to-lime-600 flex items-center justify-center" style="display: flex;"><span class="text-white text-6xl">🏔️</span>
-      </div>
-     </div>
-    </div>
-	
-   </div>
-  </section><!-- Tiket & Jadwal Section -->
-  <section id="tiket" class="py-20 transition-colors duration-300" style="background: linear-gradient(180deg, #764ba2 0%, #667eea 100%);">
-   <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-     <h2 class="text-4xl md:text-5xl font-playfair font-bold text-white mb-4">Tiket &amp; Informasi</h2>
-     <p class="text-white text-lg">Harga terjangkau untuk pengalaman tak terlupakan</p>
-    </div><!-- Map Integration -->
-    <div class="max-w-4xl mx-auto mb-12 bg-white/10 backdrop-blur-md rounded-3xl overflow-hidden shadow-lg">
-     <div class="aspect-video relative">
-      <svg class="w-full h-full" viewbox="0 0 800 450"><rect fill="rgba(255,255,255,0.1)" width="800" height="450" /> <path d="M200,300 Q300,250 400,300 T600,300" stroke="#10b981" stroke-width="4" fill="none" /> <circle cx="300" cy="280" r="10" fill="#ef4444" /> <circle cx="500" cy="280" r="10" fill="#3b82f6" /> <circle cx="400" cy="300" r="10" fill="#FFD93D" /> <text x="300" y="260" text-anchor="middle" fill="white" font-size="14" font-weight="bold">
-        Cibareubeuy
-       </text> <text x="500" y="260" text-anchor="middle" fill="white" font-size="14" font-weight="bold">
-        Cileat
-       </text> <text x="400" y="330" text-anchor="middle" fill="white" font-size="14" font-weight="bold">
-        Capolaga
-       </text> <text x="400" y="50" text-anchor="middle" fill="white" font-size="20" font-weight="bold">
-        🗺️ Peta Lokasi Destinasi Wisata
-       </text>
-      </svg>
-     </div>
-     <div class="p-6 text-center"><a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-yellow-400 text-gray-900 px-8 py-3 rounded-xl hover:bg-yellow-300 transition font-semibold"> Buka di Google Maps 📍 </a>
-     </div>
-    </div><!-- Pricing Table -->
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-     <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-3xl p-8 card-shadow">
-      <div class="text-4xl mb-4">
-       🌿
-      </div>
-      <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-2">Curug Cibareubeuy</h3>
-      <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-6">
-       Rp 15.000
-      </div>
-      <ul class="space-y-3 text-gray-700 dark:text-gray-300 mb-8">
-       <li class="flex items-center">✅ Akses area curug</li>
-       <li class="flex items-center">✅ Parkir gratis</li>
-       <li class="flex items-center">✅ Toilet &amp; mushola</li>
-       <li class="flex items-center">✅ Area istirahat</li>
-      </ul><button onclick="showBookingForm('cibareubeuy')" class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition font-semibold"> Pesan Sekarang </button>
-     </div>
-     <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-3xl p-8 card-shadow transform md:scale-105 relative">
-      <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-gray-800 px-4 py-1 rounded-full text-sm font-bold">
-       POPULER ⭐
-      </div>
-      <div class="text-4xl mb-4">
-       ⛰️
-      </div>
-      <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-2">Curug Cileat</h3>
-      <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-6">
-       Rp 20.000
-      </div>
-      <ul class="space-y-3 text-gray-700 dark:text-gray-300 mb-8">
-       <li class="flex items-center">✅ Akses area curug</li>
-       <li class="flex items-center">✅ Guide profesional</li>
-       <li class="flex items-center">✅ Perlengkapan safety</li>
-       <li class="flex items-center">✅ Foto spot terbaik</li>
-       <li class="flex items-center">✅ Sertifikat pendakian</li>
-      </ul><button onclick="showBookingForm('cileat')" class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition font-semibold"> Pesan Sekarang </button>
-     </div>
-     <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-3xl p-8 card-shadow">
-      <div class="text-4xl mb-4">
-       🏕️
-      </div>
-      <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-2">Curug Capolaga</h3>
-      <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-6">
-       Rp 25.000
-      </div>
-      <ul class="space-y-3 text-gray-700 dark:text-gray-300 mb-8">
-       <li class="flex items-center">✅ Akses area curug</li>
-       <li class="flex items-center">✅ Area camping</li>
-       <li class="flex items-center">✅ Warung &amp; resto</li>
-       <li class="flex items-center">✅ Playground anak</li>
-       <li class="flex items-center">✅ Rental camping gear</li>
-      </ul><button onclick="showBookingForm('capolaga')" class="w-full bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 transition font-semibold"> Pesan Sekarang </button>
-     </div>
-    </div><!-- Jadwal Operasional -->
-    <div class="mt-16 max-w-4xl mx-auto bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-3xl p-8">
-     <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-6 text-center">⏰ Jadwal Operasional</h3>
-     <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-gradient-to-br from-green-50 to-blue-50 dark:bg-gray-700 rounded-2xl p-6">
-       <div class="text-3xl mb-3">
-        🌞
-       </div>
-       <h4 class="font-bold text-gray-800 dark:text-white mb-2">Hari Biasa</h4>
-       <p class="text-gray-600 dark:text-gray-300">Senin - Jumat</p>
-       <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-2">07.00 - 17.00 WIB</p>
-      </div>
-      <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:bg-gray-700 rounded-2xl p-6">
-       <div class="text-3xl mb-3">
-        🎉
-       </div>
-       <h4 class="font-bold text-gray-800 dark:text-white mb-2">Akhir Pekan</h4>
-       <p class="text-gray-600 dark:text-gray-300">Sabtu - Minggu &amp; Libur</p>
-       <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-2">06.00 - 18.00 WIB</p>
-      </div>
-     </div>
-    </div>
-   </div>
-  </section><!-- Booking Modal -->
-  <div id="bookingModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-   <div class="bg-white dark:bg-gray-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-    <div class="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex justify-between items-center">
-     <h3 class="text-3xl font-playfair font-bold text-gray-800 dark:text-white">Form Pemesanan</h3><button onclick="closeBookingModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"> ✕ </button>
-    </div>
-    <form id="bookingForm" class="p-6 space-y-6"><input type="hidden" id="bookingDestination">
-     <div><label for="bookingName" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Nama Lengkap</label> <input type="text" id="bookingName" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none" placeholder="Masukkan nama lengkap">
-     </div>
-     <div><label for="bookingEmail" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Email</label> <input type="email" id="bookingEmail" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none" placeholder="email@example.com">
-     </div>
-     <div><label for="bookingPhone" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Nomor Telepon</label> <input type="tel" id="bookingPhone" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none" placeholder="08xx xxxx xxxx">
-     </div>
-     <div><label for="bookingDate" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Tanggal Kunjungan</label> <input type="date" id="bookingDate" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none">
-     </div>
-     <div><label for="bookingGuests" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Jumlah Pengunjung</label> <input type="number" id="bookingGuests" required min="1" value="1" class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none">
-     </div>
-     <div><label for="bookingMessage" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Pesan Tambahan (Opsional)</label> <textarea id="bookingMessage" rows="4" class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none resize-none" placeholder="Ada permintaan khusus?"></textarea>
-     </div><button type="submit" id="bookingSubmitBtn" class="w-full bg-green-600 text-white py-4 rounded-xl hover:bg-green-700 transition font-bold text-lg"> Kirim Pemesanan 🎫 </button>
-    </form>
-   </div>
-  </div><!-- Testimoni Section -->
-  <section class="py-20 transition-colors duration-300" style="background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);">
-   <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-     <h2 class="text-4xl md:text-5xl font-playfair font-bold text-white mb-4">Testimoni Pengunjung</h2>
-     <p class="text-white text-lg">Apa kata mereka yang telah berkunjung</p>
-    </div><!-- Testimonial Carousel -->
-    <div class="max-w-4xl mx-auto relative">
-     <div id="testimonialCarousel" class="overflow-hidden rounded-3xl">
-      <div id="testimonialTrack" class="flex transition-transform duration-500"><!-- Testimonials will be loaded here -->
-      </div>
-     </div><button id="testimonialPrev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition"> ← </button> <button id="testimonialNext" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition"> → </button>
-    </div><!-- Add Testimonial Form -->
-    <div class="max-w-2xl mx-auto mt-16 bg-white dark:bg-gray-800 rounded-3xl p-8 card-shadow">
-     <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-6 text-center">Bagikan Pengalaman Anda ✨</h3>
-     <form id="testimonialForm" class="space-y-6">
-      <div><label for="testimonialName" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Nama</label> <input type="text" id="testimonialName" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none" placeholder="Nama Anda">
-      </div>
-      <div><label for="testimonialDestination" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Destinasi yang Dikunjungi</label> <select id="testimonialDestination" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none"> <option value="">Pilih destinasi</option> <option value="Curug Cibareubeuy">Curug Cibareubeuy</option> <option value="Curug Cileat">Curug Cileat</option> <option value="Curug Capolaga">Curug Capolaga</option> </select>
-      </div>
-      <div><label class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Rating</label>
-       <div id="ratingStars" class="flex space-x-2 text-4xl"><span class="rating-star text-gray-300" data-rating="1">⭐</span> <span class="rating-star text-gray-300" data-rating="2">⭐</span> <span class="rating-star text-gray-300" data-rating="3">⭐</span> <span class="rating-star text-gray-300" data-rating="4">⭐</span> <span class="rating-star text-gray-300" data-rating="5">⭐</span>
-       </div><input type="hidden" id="testimonialRating" required>
-      </div>
-      <div><label for="testimonialMessage" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Testimoni Anda</label> <textarea id="testimonialMessage" required rows="4" class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none resize-none" placeholder="Ceritakan pengalaman Anda..."></textarea>
-      </div><button type="submit" id="testimonialSubmitBtn" class="w-full bg-green-600 text-white py-4 rounded-xl hover:bg-green-700 transition font-bold text-lg"> Kirim Testimoni 💬 </button>
-     </form>
-    </div>
-   </div>
-  </section><!-- Tentang Section -->
-  <section id="tentang" class="py-20 transition-colors duration-300" style="background: linear-gradient(180deg, #764ba2 0%, #667eea 100%);">
-   <div class="container mx-auto px-6">
-    <div class="max-w-6xl mx-auto">
-     <div class="text-center mb-12">
-      <div class="inline-block bg-yellow-400 px-6 py-2 rounded-full mb-4"><span class="text-gray-900 font-semibold">✨ Tentang Kami</span>
-      </div>
-      <h2 id="aboutTitle" class="text-4xl md:text-5xl font-playfair font-bold text-white mb-4">Tentang Destinasi Wisata Subang</h2>
-      <div class="w-24 h-1 bg-yellow-400 mx-auto rounded-full"></div>
-     </div>
-     <div class="grid md:grid-cols-2 gap-8 mb-12">
-      <div class="bg-white dark:bg-gray-700 rounded-3xl p-8 card-shadow">
-       <div class="bg-gradient-to-br from-green-400 to-green-600 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6">
-        🌿
-       </div>
-       <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-4">Keindahan Alami</h3>
-       <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Subang, sebuah kabupaten di Jawa Barat, menyimpan pesona alam yang luar biasa. Tersembunyi di antara perbukitan hijau dan hutan tropis yang lebat, terdapat deretan air terjun (curug) yang memukau dengan keindahan alaminya.</p>
-      </div>
-      <div class="bg-white dark:bg-gray-700 rounded-3xl p-8 card-shadow">
-       <div class="bg-gradient-to-br from-blue-400 to-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6">
-        🏔️
-       </div>
-       <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-4">Karakter Unik</h3>
-       <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Setiap curug memiliki karakter unik. Dari yang tenang dan meditatif hingga yang megah dan menantang. Keanekaragaman ini menjadikan Subang sebagai surga bagi para pencinta alam dan petualang sejati.</p>
-      </div>
-     </div>
-     <div class="grid md:grid-cols-3 gap-6 mb-12">
-      <div class="bg-gradient-to-br from-green-400 to-green-600 rounded-3xl p-8 text-white card-shadow transform hover:scale-105 transition">
-       <div class="text-5xl mb-4">
-        🌳
-       </div>
-       <h4 class="font-bold text-xl mb-3">Alam Asri</h4>
-       <p class="text-green-50">Hutan tropis yang terjaga kelestariannya dengan ribuan spesies flora dan fauna</p>
-       <div class="mt-6 bg-white/20 rounded-full px-4 py-2 text-sm font-semibold inline-block">
-        🌱 Eco-Friendly
-       </div>
-      </div>
-      <div class="bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl p-8 text-white card-shadow transform hover:scale-105 transition">
-       <div class="text-5xl mb-4">
-        💧
-       </div>
-       <h4 class="font-bold text-xl mb-3">Air Jernih</h4>
-       <p class="text-blue-50">Sumber air alami yang menyegarkan langsung dari pegunungan Subang</p>
-       <div class="mt-6 bg-white/20 rounded-full px-4 py-2 text-sm font-semibold inline-block">
-        💎 Kristal Jernih
-       </div>
-      </div>
-      <div class="bg-gradient-to-br from-purple-400 to-pink-500 rounded-3xl p-8 text-white card-shadow transform hover:scale-105 transition">
-       <div class="text-5xl mb-4">
-        🦋
-       </div>
-       <h4 class="font-bold text-xl mb-3">Biodiversitas</h4>
-       <p class="text-purple-50">Habitat beragam flora dan fauna yang dilindungi dan dipelihara</p>
-       <div class="mt-6 bg-white/20 rounded-full px-4 py-2 text-sm font-semibold inline-block">
-        🌺 Natural Habitat
-       </div>
-      </div>
-     </div>
-     <div class="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 rounded-3xl p-1">
-      <div class="bg-white dark:bg-gray-800 rounded-3xl p-8">
-       <div class="flex items-center justify-center mb-6">
-        <div class="bg-yellow-400 rounded-full p-4">
-         <svg class="w-12 h-12 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-         </svg>
-        </div>
-       </div>
-       <h3 class="text-2xl md:text-3xl font-playfair font-bold text-center text-gray-800 dark:text-white mb-4">Komitmen Kami</h3>
-       <p class="text-center text-gray-600 dark:text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">Komitmen kami adalah menjaga kelestarian alam sambil memberikan pengalaman wisata terbaik. Setiap pengunjung diharapkan untuk menghormati alam dan mengikuti prinsip <span class="font-bold text-green-600 dark:text-green-400">"Leave No Trace"</span> - tidak meninggalkan jejak negatif di lingkungan.</p>
-       <div class="flex flex-wrap justify-center gap-4 mt-8">
-        <div class="bg-green-100 dark:bg-green-900/30 px-6 py-3 rounded-full"><span class="text-green-700 dark:text-green-300 font-semibold">♻️ Sustainable Tourism</span>
-        </div>
-        <div class="bg-blue-100 dark:bg-blue-900/30 px-6 py-3 rounded-full"><span class="text-blue-700 dark:text-blue-300 font-semibold">🌍 Eco Conservation</span>
-        </div>
-        <div class="bg-purple-100 dark:bg-purple-900/30 px-6 py-3 rounded-full"><span class="text-purple-700 dark:text-purple-300 font-semibold">🤝 Community Care</span>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-  </section><!-- Kontak Section -->
-  <section id="kontak" class="py-20 transition-colors duration-300" style="background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);">
-   <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-     <h2 class="text-4xl md:text-5xl font-playfair font-bold text-white mb-4">Hubungi Kami</h2>
-     <p class="text-white text-lg">Ada pertanyaan? Kami siap membantu Anda</p>
-    </div>
-    <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto"><!-- Contact Info -->
-     <div class="space-y-8">
-      <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 card-shadow">
-       <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-6">Informasi Kontak</h3>
-       <div class="space-y-6">
-        <div class="flex items-start space-x-4">
-         <div class="text-3xl">
-          📍
-         </div>
-         <div>
-          <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Alamat</h4>
-          <p class="text-gray-600 dark:text-gray-400">Kabupaten Subang, Jawa Barat, Indonesia</p>
-         </div>
-        </div>
-        <div class="flex items-start space-x-4">
-         <div class="text-3xl">
-          📱
-         </div>
-         <div>
-          <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Telepon</h4>
-          <p id="contactPhone" class="text-gray-600 dark:text-gray-400">+62 812-3456-7890</p>
-         </div>
-        </div>
-        <div class="flex items-start space-x-4">
-         <div class="text-3xl">
-          ✉️
-         </div>
-         <div>
-          <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Email</h4>
-          <p id="contactEmail" class="text-gray-600 dark:text-gray-400">info@subangwaterfalls.com</p>
-         </div>
-        </div>
-        <div class="flex items-start space-x-4">
-         <div class="text-3xl">
-          ⏰
-         </div>
-         <div>
-          <h4 class="font-semibold text-gray-800 dark:text-white mb-1">Jam Operasional</h4>
-          <p class="text-gray-600 dark:text-gray-400">Setiap hari: 07.00 - 17.00 WIB</p>
-         </div>
-        </div>
-       </div><!-- Social Media -->
-       <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <h4 class="font-semibold text-gray-800 dark:text-white mb-4">Ikuti Kami</h4>
-        <div class="flex space-x-4"><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-br from-purple-500 to-pink-500 text-white p-3 rounded-xl hover:scale-110 transition"> 📷 </a> <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white p-3 rounded-xl hover:scale-110 transition"> 📘 </a> <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="bg-green-500 text-white p-3 rounded-xl hover:scale-110 transition"> 💬 </a> <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="bg-red-600 text-white p-3 rounded-xl hover:scale-110 transition"> ▶️ </a>
-        </div>
-       </div>
-      </div>
-     </div><!-- Contact Form -->
-     <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 card-shadow">
-      <h3 class="text-2xl font-playfair font-bold text-gray-800 dark:text-white mb-6">Kirim Pesan</h3>
-      <form id="contactForm" class="space-y-6">
-       <div><label for="contactName" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Nama</label> <input type="text" id="contactName" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none" placeholder="Nama lengkap Anda">
-       </div>
-       <div><label for="contactFormEmail" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Email</label> <input type="email" id="contactFormEmail" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none" placeholder="email@example.com">
-       </div>
-       <div><label for="contactSubject" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Subjek</label> <input type="text" id="contactSubject" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none" placeholder="Perihal pesan Anda">
-       </div>
-       <div><label for="contactFormMessage" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Pesan</label> <textarea id="contactFormMessage" required rows="5" class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none resize-none" placeholder="Tulis pesan Anda di sini..."></textarea>
-       </div><button type="submit" id="contactSubmitBtn" class="w-full bg-green-600 text-white py-4 rounded-xl hover:bg-green-700 transition font-bold text-lg"> Kirim Pesan 📨 </button>
-      </form>
-     </div>
-    </div>
-   </div>
-  </section><!-- Footer -->
-  <footer class="bg-gray-800 dark:bg-gray-950 text-white py-12 transition-colors duration-300">
-   <div class="container mx-auto px-6">
-    <div class="grid md:grid-cols-4 gap-8 mb-8">
-     <div>
-      <div class="flex items-center space-x-2 mb-4"><span class="text-3xl">🌿</span> <span class="text-xl font-playfair font-bold">Explore Subang</span>
-      </div>
-      <p class="text-gray-400">Jelajahi keindahan alam air terjun Subang yang memukau</p>
-     </div>
-     <div>
-      <h4 class="font-bold mb-4">Destinasi</h4>
-      <ul class="space-y-2 text-gray-400">
-       <li><a href="#destinasi" class="hover:text-green-400 transition">Curug Cibareubeuy</a></li>
-       <li><a href="#destinasi" class="hover:text-green-400 transition">Curug Cileat</a></li>
-       <li><a href="#destinasi" class="hover:text-green-400 transition">Curug Capolaga</a></li>
-      </ul>
-     </div>
-     <div>
-      <h4 class="font-bold mb-4">Informasi</h4>
-      <ul class="space-y-2 text-gray-400">
-       <li><a href="#tentang" class="hover:text-green-400 transition">Tentang Kami</a></li>
-       <li><a href="#tiket" class="hover:text-green-400 transition">Harga Tiket</a></li>
-       <li><a href="#galeri" class="hover:text-green-400 transition">Galeri</a></li>
-       <li><a href="#kontak" class="hover:text-green-400 transition">Kontak</a></li>
-      </ul>
-     </div>
-     <div>
-      <h4 class="font-bold mb-4">Newsletter</h4>
-      <p class="text-gray-400 text-sm mb-4">Dapatkan info terbaru tentang destinasi wisata</p>
-      <div class="flex"><input type="email" placeholder="Email Anda" class="flex-1 px-4 py-2 rounded-l-lg bg-gray-700 text-white focus:outline-none"> <button class="bg-green-600 px-4 py-2 rounded-r-lg hover:bg-green-700 transition"> ✉️ </button>
-      </div>
-     </div>
-    </div>
-    <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
-     <p id="footerText">© 2024 Explore Subang Waterfalls. All rights reserved.</p>
-     <p class="text-sm mt-2">Made with 💚 for nature lovers</p>
-    </div>
-   </div>
-  </footer><!-- Chatbot Bubble -->
-  <div class="chatbot-bubble"><button id="chatbotToggle" class="bg-green-600 text-white rounded-full p-4 shadow-lg hover:bg-green-700 transition transform hover:scale-110">
-    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-    </svg></button>
-  </div><!-- Chatbot Window -->
-  <div id="chatbotWindow" class="fixed bottom-24 right-8 w-96 max-w-[90vw] bg-white dark:bg-gray-800 rounded-3xl shadow-2xl hidden z-50">
-   <div class="bg-gradient-to-r from-green-600 to-green-700 text-white p-6 rounded-t-3xl flex justify-between items-center">
-    <div>
-     <h3 class="font-bold text-lg">Asisten Wisata 🌿</h3>
-     <p class="text-sm opacity-90">Siap membantu Anda</p>
-    </div><button id="chatbotClose" class="text-white hover:bg-white/20 rounded-full p-2 transition"> ✕ </button>
-   </div>
-   <div id="chatbotMessages" class="h-96 overflow-y-auto p-6 space-y-4">
-    <div class="flex items-start space-x-3">
-     <div class="bg-green-100 dark:bg-green-900 rounded-full p-2 text-2xl">
-      🤖
-     </div>
-     <div class="bg-gray-100 dark:bg-gray-700 rounded-2xl p-4 max-w-[80%]">
-      <p class="text-gray-800 dark:text-white">Halo! Saya asisten virtual Explore Subang. Ada yang bisa saya bantu? 😊</p>
-     </div>
-    </div>
-   </div>
-   <div class="p-4 border-t border-gray-200 dark:border-gray-700">
-    <div class="flex flex-wrap gap-2 mb-3"><button onclick="sendQuickReply('Harga tiket berapa?')" class="text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white px-3 py-2 rounded-full hover:bg-green-100 dark:hover:bg-green-900 transition"> Harga tiket? </button> <button onclick="sendQuickReply('Jam operasional?')" class="text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white px-3 py-2 rounded-full hover:bg-green-100 dark:hover:bg-green-900 transition"> Jam buka? </button> <button onclick="sendQuickReply('Cara ke lokasi?')" class="text-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white px-3 py-2 rounded-full hover:bg-green-100 dark:hover:bg-green-900 transition"> Rute ke sana? </button>
-    </div>
-    <form id="chatbotForm" class="flex space-x-2"><input type="text" id="chatbotInput" placeholder="Ketik pesan..." class="flex-1 px-4 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-green-500 focus:outline-none"> <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition font-semibold"> ➤ </button>
-    </form>
-   </div>
-  </div>
-  <script>
-    // Default Config
-    const defaultConfig = {
-      hero_title: "Jelajahi Surga Tersembunyi di Subang",
-      hero_subtitle: "Temukan keindahan air terjun yang memukau di tengah hutan tropis Indonesia",
-      about_title: "Tentang Destinasi Wisata Subang",
-      contact_phone: "+62 812-3456-7890",
-      contact_email: "info@subangwaterfalls.com",
-      footer_text: "© 2024 Explore Subang Waterfalls. All rights reserved."
-    };
-
-    // Config Reference
-    let config = window.elementSdk ? window.elementSdk.config : { ...defaultConfig };
-
-    // Language Data
-    const translations = {
-      id: {
-        heroTitle: "Jelajahi Surga Tersembunyi di Subang",
-        heroSubtitle: "Temukan keindahan air terjun yang memukau",
-        exploreBtn: "Explore Destinasi ✨",
-        bookBtn: "Pesan Tiket 🎫",
-        allDestinations: "Semua Destinasi",
-        familyFriendly: "Cocok Keluarga 👨‍👩‍👧‍👦",
-        adventure: "Petualangan 🏔️",
-        relaxation: "Relaksasi 🧘"
-      },
-      en: {
-        heroTitle: "Explore Hidden Paradise in Subang",
-        heroSubtitle: "Discover stunning waterfall beauty",
-        exploreBtn: "Explore Destinations ✨",
-        bookBtn: "Book Tickets 🎫",
-        allDestinations: "All Destinations",
-        familyFriendly: "Family Friendly 👨‍👩‍👧‍👦",
-        adventure: "Adventure 🏔️",
-        relaxation: "Relaxation 🧘"
-      }
-    };
-
-    let currentLang = 'id';
-    let currentTestimonialIndex = 0;
-    let selectedRating = 0;
-
-    // Initialize SDK and App
-    async function init() {
-      const dataHandler = {
-        onDataChanged(data) {
-          renderTestimonials(data);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajeng Tyas Putri, S.Farm. | Portofolio Farmasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-soft-pink: #FFF5F7; 
+            --primary-pink: #FF1493; 
+            --secondary-pink: #FF69B4; 
+            --accent-pink: #C71585; 
+            --text-dark: #1A1A1A;
         }
-      };
 
-      if (window.dataSdk) {
-        const initResult = await window.dataSdk.init(dataHandler);
-        if (!initResult.isOk) {
-          console.error("Failed to initialize data SDK");
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(to bottom, #FFF5F7, #FFFBFC, #FFF5F7);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            position: relative;
         }
-      }
 
-      if (window.elementSdk) {
-        await window.elementSdk.init({
-          defaultConfig,
-          onConfigChange: async (config) => {
-            document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
-            document.getElementById('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-            document.getElementById('aboutTitle').textContent = config.about_title || defaultConfig.about_title;
-            document.getElementById('contactPhone').textContent = config.contact_phone || defaultConfig.contact_phone;
-            document.getElementById('contactEmail').textContent = config.contact_email || defaultConfig.contact_email;
-            document.getElementById('footerText').textContent = config.footer_text || defaultConfig.footer_text;
-          },
-          mapToCapabilities: (config) => ({
-            recolorables: [],
-            borderables: [],
-            fontEditable: undefined,
-            fontSizeable: undefined
-          }),
-          mapToEditPanelValues: (config) => new Map([
-            ["hero_title", config.hero_title || defaultConfig.hero_title],
-            ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
-            ["about_title", config.about_title || defaultConfig.about_title],
-            ["contact_phone", config.contact_phone || defaultConfig.contact_phone],
-            ["contact_email", config.contact_email || defaultConfig.contact_email],
-            ["footer_text", config.footer_text || defaultConfig.footer_text]
-          ])
-        });
-      }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
 
-      initGallery();
-      setupEventListeners();
-      animateCounter();
-    }
+        /* Elemen Latar Belakang */
+        .bg-pill {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.25; 
+            animation: float-random 20s ease-in-out infinite;
+        }
 
-    // Initialize Gallery
-    function initGallery() {
-      const gallery = document.getElementById('galleryGrid');
-      const destinations = ['cibareubeuy', 'cileat', 'capolaga'];
-      const colors = [
-        ['#10b981', '#059669'],
-        ['#3b82f6', '#1d4ed8'],
-        ['#a855f7', '#ec4899']
-      ];
-      
-      destinations.forEach((dest, destIndex) => {
-        for (let i = 0; i < 3; i++) {
-          const div = document.createElement('div');
-          div.className = 'gallery-item rounded-2xl overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300 card-shadow';
-          div.dataset.gallery = dest;
-          div.innerHTML = `
-            <div class="aspect-square bg-gradient-to-br" style="background: linear-gradient(135deg, ${colors[destIndex][0]} 0%, ${colors[destIndex][1]} 100%);">
-              <svg class="w-full h-full" viewBox="0 0 300 300">
-                <rect fill="url(#grad${destIndex})" width="300" height="300"/>
-                <defs>
-                  <linearGradient id="grad${destIndex}" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:${colors[destIndex][0]};stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:${colors[destIndex][1]};stop-opacity:1" />
-                  </linearGradient>
-                </defs>
-                <path d="M0,150 Q75,${100 + i * 20} 150,150 T300,150 L300,300 L0,300 Z" fill="white" opacity="0.2"/>
-                <circle cx="150" cy="${80 + i * 20}" r="30" fill="white" opacity="0.3"/>
-                <text x="150" y="160" text-anchor="middle" fill="white" font-size="20" font-weight="bold">${dest.charAt(0).toUpperCase() + dest.slice(1)}</text>
-              </svg>
+        @keyframes float-random {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(15deg); }
+            66% { transform: translate(-20px, 40px) rotate(-10deg); }
+        }
+
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-text.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--primary-pink);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-pink); }
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 3px solid var(--primary-pink);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.05);
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-pink);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-pink);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .pink-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 2px solid var(--secondary-pink);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 10;
+        }
+
+        .pink-card:hover {
+            border-color: var(--primary-pink);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 20, 147, 0.12);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-pink);
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .section-title {
+            color: var(--accent-pink);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: var(--secondary-pink);
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .emoji-float {
+            position: absolute;
+            font-size: 2.5rem;
+            z-index: 20;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        section {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Latar Belakang Emoji -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none" id="emoji-background"></div>
+
+    <!-- 1. HEADER -->
+    <header class="fixed w-full top-0 z-50 glass-header">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter text-pink-600">
+                AJENG<span class="text-pink-400">TYAS.</span> 💊
             </div>
-          `;
-          gallery.appendChild(div);
-        }
-      });
-    }
 
-    // Setup Event Listeners
-    function setupEventListeners() {
-      // Dark Mode
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-
-      darkModeToggle.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-      });
-
-      // Mobile Menu
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-      });
-
-      // Language Switcher
-      const languageSwitcher = document.getElementById('languageSwitcher');
-      languageSwitcher.addEventListener('change', (e) => {
-        currentLang = e.target.value;
-        updateLanguage();
-      });
-
-      // Destination Filter
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          filterBtns.forEach(b => {
-            b.classList.remove('active', 'bg-yellow-400', 'bg-yellow-300');
-            b.classList.add('bg-white');
-          });
-          e.target.classList.add('active', 'bg-yellow-400');
-          e.target.classList.remove('bg-white');
-          
-          const filter = e.target.dataset.filter;
-          const cards = document.querySelectorAll('.destination-card');
-          cards.forEach(card => {
-            if (filter === 'all' || card.dataset.category === filter) {
-              card.style.display = 'block';
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-
-      // Gallery Filter
-      const galleryFilters = document.querySelectorAll('.gallery-filter');
-      galleryFilters.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          galleryFilters.forEach(b => {
-            b.classList.remove('active', 'bg-yellow-400', 'bg-yellow-300');
-            b.classList.add('bg-white');
-          });
-          e.target.classList.add('active', 'bg-yellow-400');
-          e.target.classList.remove('bg-white');
-          
-          const filter = e.target.dataset.gallery;
-          const items = document.querySelectorAll('.gallery-item');
-          items.forEach(item => {
-            if (filter === 'all' || item.dataset.gallery === filter) {
-              item.style.display = 'block';
-            } else {
-              item.style.display = 'none';
-            }
-          });
-        });
-      });
-
-      // Search
-      const searchInput = document.getElementById('searchInput');
-      const searchResults = document.getElementById('searchResults');
-      
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        if (query.length > 0) {
-          const results = searchContent(query);
-          displaySearchResults(results);
-        } else {
-          searchResults.classList.add('hidden');
-        }
-      });
-
-      // Rating Stars
-      const ratingStars = document.querySelectorAll('.rating-star');
-      ratingStars.forEach(star => {
-        star.addEventListener('click', () => {
-          selectedRating = parseInt(star.dataset.rating);
-          updateStarDisplay();
-          document.getElementById('testimonialRating').value = selectedRating;
-        });
-        
-        star.addEventListener('mouseenter', () => {
-          const rating = parseInt(star.dataset.rating);
-          ratingStars.forEach((s, idx) => {
-            if (idx < rating) {
-              s.style.color = '#fbbf24';
-            } else {
-              s.style.color = '#d1d5db';
-            }
-          });
-        });
-        
-        star.addEventListener('mouseleave', () => {
-          updateStarDisplay();
-        });
-      });
-
-      // Forms
-      document.getElementById('bookingForm').addEventListener('submit', handleBookingSubmit);
-      document.getElementById('testimonialForm').addEventListener('submit', handleTestimonialSubmit);
-      document.getElementById('contactForm').addEventListener('submit', handleContactSubmit);
-
-      // Chatbot
-      const chatbotToggle = document.getElementById('chatbotToggle');
-      const chatbotWindow = document.getElementById('chatbotWindow');
-      const chatbotClose = document.getElementById('chatbotClose');
-      const chatbotForm = document.getElementById('chatbotForm');
-
-      chatbotToggle.addEventListener('click', () => {
-        chatbotWindow.classList.toggle('hidden');
-      });
-
-      chatbotClose.addEventListener('click', () => {
-        chatbotWindow.classList.add('hidden');
-      });
-
-      chatbotForm.addEventListener('submit', handleChatbotSubmit);
-
-      // Testimonial Carousel
-      document.getElementById('testimonialPrev').addEventListener('click', () => {
-        currentTestimonialIndex = Math.max(0, currentTestimonialIndex - 1);
-        updateTestimonialCarousel();
-      });
-
-      document.getElementById('testimonialNext').addEventListener('click', () => {
-        const testimonials = document.querySelectorAll('#testimonialTrack > div');
-        currentTestimonialIndex = Math.min(testimonials.length - 1, currentTestimonialIndex + 1);
-        updateTestimonialCarousel();
-      });
-
-      // Smooth Scrolling
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
-      });
-    }
-
-    // Update Language
-    function updateLanguage() {
-      const t = translations[currentLang];
-      if (!t) return;
-
-      const heroTitle = document.getElementById('heroTitle');
-      const heroSubtitle = document.getElementById('heroSubtitle');
-      
-      if (currentLang === 'en') {
-        heroTitle.textContent = t.heroTitle;
-        heroSubtitle.textContent = t.heroSubtitle;
-      } else {
-        heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
-        heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-      }
-    }
-
-    // Search Function
-    function searchContent(query) {
-      const results = [];
-      const destinations = [
-        { name: 'Curug Cibareubeuy', category: 'relaksasi', keywords: 'hening asri relaksasi meditasi' },
-        { name: 'Curug Cileat', category: 'petualangan', keywords: 'megah menantang trekking petualangan' },
-        { name: 'Curug Capolaga', category: 'keluarga', keywords: 'keluarga camping piknik fun' }
-      ];
-
-      destinations.forEach(dest => {
-        if (dest.name.toLowerCase().includes(query) || dest.keywords.toLowerCase().includes(query)) {
-          results.push(dest);
-        }
-      });
-
-      return results;
-    }
-
-    // Display Search Results
-    function displaySearchResults(results) {
-      const searchResults = document.getElementById('searchResults');
-      
-      if (results.length === 0) {
-        searchResults.innerHTML = '<p class="p-4 text-gray-600 dark:text-gray-400">Tidak ada hasil ditemukan</p>';
-      } else {
-        searchResults.innerHTML = results.map(result => `
-          <div class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer border-b border-gray-200 dark:border-gray-700 last:border-0">
-            <a href="#destinasi" class="block">
-              <h4 class="font-semibold text-gray-800 dark:text-white">${result.name}</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-400">${result.category}</p>
-            </a>
-          </div>
-        `).join('');
-      }
-      
-      searchResults.classList.remove('hidden');
-    }
-
-    // Animate Counter
-    function animateCounter() {
-      const counter = document.getElementById('visitorCount');
-      let count = 0;
-      const target = 12500;
-      const duration = 2000;
-      const increment = target / (duration / 16);
-
-      const timer = setInterval(() => {
-        count += increment;
-        if (count >= target) {
-          counter.textContent = '12.5K+';
-          clearInterval(timer);
-        } else {
-          counter.textContent = Math.floor(count / 1000) + 'K+';
-        }
-      }, 16);
-    }
-
-    // Show Destination Detail
-    function showDestinationDetail(destination) {
-      const modal = document.getElementById('destinationModal');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalContent = document.getElementById('modalContent');
-
-      const details = {
-        cibareubeuy: {
-          title: 'Curug Cibareubeuy',
-          description: 'Air terjun yang menawarkan suasana tenang dan damai, cocok untuk meditasi dan relaksasi.',
-          height: '25 meter',
-          difficulty: 'Mudah',
-          facilities: ['Parkir', 'Toilet', 'Mushola', 'Warung'],
-          tips: ['Bawa kamera', 'Pakai sepatu nyaman', 'Datang pagi hari'],
-          price: 'Rp 15.000'
-        },
-        cileat: {
-          title: 'Curug Cileat',
-          description: 'Air terjun tertinggi di Subang dengan ketinggian 75 meter, menawarkan pemandangan spektakuler.',
-          height: '75 meter',
-          difficulty: 'Menantang',
-          facilities: ['Guide', 'Safety Equipment', 'First Aid', 'Camping Area'],
-          tips: ['Kondisi fisik prima', 'Bawa bekal cukup', 'Ikuti instruksi guide'],
-          price: 'Rp 20.000'
-        },
-        capolaga: {
-          title: 'Curug Capolaga',
-          description: 'Destinasi keluarga dengan fasilitas lengkap, area camping, dan playground untuk anak-anak.',
-          height: '15 meter',
-          difficulty: 'Mudah',
-          facilities: ['Camping Area', 'Playground', 'Resto', 'Rental Alat'],
-          tips: ['Cocok untuk keluarga', 'Sewa tenda tersedia', 'BBQ area available'],
-          price: 'Rp 25.000'
-        }
-      };
-
-      const detail = details[destination];
-      modalTitle.textContent = detail.title;
-      modalContent.innerHTML = `
-        <div class="space-y-6">
-          <p class="text-lg text-gray-600 dark:text-gray-400">${detail.description}</p>
-          
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-gray-50 dark:bg-gray-700 rounded-2xl p-6">
-              <h4 class="font-bold text-gray-800 dark:text-white mb-4">Informasi</h4>
-              <ul class="space-y-3">
-                <li class="flex justify-between">
-                  <span class="text-gray-600 dark:text-gray-400">Ketinggian:</span>
-                  <span class="font-semibold text-gray-800 dark:text-white">${detail.height}</span>
-                </li>
-                <li class="flex justify-between">
-                  <span class="text-gray-600 dark:text-gray-400">Tingkat Kesulitan:</span>
-                  <span class="font-semibold text-gray-800 dark:text-white">${detail.difficulty}</span>
-                </li>
-                <li class="flex justify-between">
-                  <span class="text-gray-600 dark:text-gray-400">Harga Tiket:</span>
-                  <span class="font-semibold text-green-600 dark:text-green-400">${detail.price}</span>
-                </li>
-              </ul>
+            <div class="hidden md:flex items-center space-x-10">
+                <a href="#home" class="nav-link uppercase tracking-wider">Beranda</a>
+                <a href="#about" class="nav-link uppercase tracking-wider">Tentang</a>
+                <a href="#skills" class="nav-link uppercase tracking-wider">Keahlian</a>
+                <a href="#portfolio" class="nav-link uppercase tracking-wider">Portofolio</a>
+                <a href="#consultation" class="nav-link uppercase tracking-wider text-pink-600">Konsultasi</a>
             </div>
-            
-            <div class="bg-gray-50 dark:bg-gray-700 rounded-2xl p-6">
-              <h4 class="font-bold text-gray-800 dark:text-white mb-4">Fasilitas</h4>
-              <ul class="space-y-2">
-                ${detail.facilities.map(f => `<li class="text-gray-600 dark:text-gray-400">✅ ${f}</li>`).join('')}
-              </ul>
+
+            <div class="hidden md:block">
+                <a href="#consultation" class="btn-primary px-8 py-3 rounded-xl shadow-lg inline-block uppercase text-xs tracking-widest">
+                    Tanya Obat ✨
+                </a>
             </div>
-          </div>
-          
-          <div class="bg-blue-50 dark:bg-blue-900/20 rounded-2xl p-6">
-            <h4 class="font-bold text-gray-800 dark:text-white mb-4">💡 Tips Berkunjung</h4>
-            <ul class="space-y-2">
-              ${detail.tips.map(t => `<li class="text-gray-600 dark:text-gray-400">• ${t}</li>`).join('')}
-            </ul>
-          </div>
-          
-          <button onclick="showBookingForm('${destination}')" class="w-full bg-green-600 text-white py-4 rounded-xl hover:bg-green-700 transition font-bold text-lg">
-            Pesan Tiket Sekarang 🎫
-          </button>
-        </div>
-      `;
 
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
+            <button class="md:hidden text-pink-600 p-2" id="mobile-menu-btn">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </nav>
+    </header>
 
-    // Close Destination Modal
-    function closeDestinationModal() {
-      const modal = document.getElementById('destinationModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    // Show Booking Form
-    function showBookingForm(destination) {
-      closeDestinationModal();
-      const modal = document.getElementById('bookingModal');
-      document.getElementById('bookingDestination').value = destination;
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('bookingDate').setAttribute('min', today);
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    // Close Booking Modal
-    function closeBookingModal() {
-      const modal = document.getElementById('bookingModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.getElementById('bookingForm').reset();
-    }
-
-    // Handle Booking Submit
-    async function handleBookingSubmit(e) {
-      e.preventDefault();
-      
-      const submitBtn = document.getElementById('bookingSubmitBtn');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Mengirim...';
-
-      const formData = {
-        id: Date.now().toString(),
-        type: 'booking',
-        destination: document.getElementById('bookingDestination').value,
-        name: document.getElementById('bookingName').value,
-        email: document.getElementById('bookingEmail').value,
-        phone: document.getElementById('bookingPhone').value,
-        date: document.getElementById('bookingDate').value,
-        message: document.getElementById('bookingMessage').value,
-        createdAt: new Date().toISOString()
-      };
-
-      if (window.dataSdk) {
-        const result = await window.dataSdk.create(formData);
-        
-        if (result.isOk) {
-          const successMsg = document.createElement('div');
-          successMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-          successMsg.textContent = '✅ Pemesanan berhasil! Kami akan menghubungi Anda segera.';
-          document.body.appendChild(successMsg);
-          setTimeout(() => successMsg.remove(), 3000);
-          closeBookingModal();
-        } else {
-          const errorMsg = document.createElement('div');
-          errorMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-          errorMsg.textContent = '❌ Terjadi kesalahan. Silakan coba lagi.';
-          document.body.appendChild(errorMsg);
-          setTimeout(() => errorMsg.remove(), 3000);
-        }
-      } else {
-        const successMsg = document.createElement('div');
-        successMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-        successMsg.textContent = '✅ Pemesanan berhasil! (Demo Mode)';
-        document.body.appendChild(successMsg);
-        setTimeout(() => successMsg.remove(), 3000);
-        closeBookingModal();
-      }
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Kirim Pemesanan 🎫';
-    }
-
-    // Update Star Display
-    function updateStarDisplay() {
-      const ratingStars = document.querySelectorAll('.rating-star');
-      ratingStars.forEach((star, idx) => {
-        if (idx < selectedRating) {
-          star.style.color = '#fbbf24';
-        } else {
-          star.style.color = '#d1d5db';
-        }
-      });
-    }
-
-    // Handle Testimonial Submit
-    async function handleTestimonialSubmit(e) {
-      e.preventDefault();
-      
-      const submitBtn = document.getElementById('testimonialSubmitBtn');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Mengirim...';
-
-      if (selectedRating === 0) {
-        const warningMsg = document.createElement('div');
-        warningMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-        warningMsg.textContent = 'Silakan pilih rating bintang terlebih dahulu!';
-        document.body.appendChild(warningMsg);
-        setTimeout(() => warningMsg.remove(), 3000);
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Kirim Testimoni 💬';
-        return;
-      }
-
-      const formData = {
-        id: Date.now().toString(),
-        type: 'testimonial',
-        name: document.getElementById('testimonialName').value,
-        destination: document.getElementById('testimonialDestination').value,
-        rating: selectedRating,
-        message: document.getElementById('testimonialMessage').value,
-        createdAt: new Date().toISOString()
-      };
-
-      if (window.dataSdk) {
-        const result = await window.dataSdk.create(formData);
-        
-        if (result.isOk) {
-          const successMsg = document.createElement('div');
-          successMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-          successMsg.textContent = '✅ Terima kasih atas testimoni Anda!';
-          document.body.appendChild(successMsg);
-          setTimeout(() => successMsg.remove(), 3000);
-          document.getElementById('testimonialForm').reset();
-          selectedRating = 0;
-          updateStarDisplay();
-        } else {
-          const errorMsg = document.createElement('div');
-          errorMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-          errorMsg.textContent = '❌ Terjadi kesalahan. Silakan coba lagi.';
-          document.body.appendChild(errorMsg);
-          setTimeout(() => errorMsg.remove(), 3000);
-        }
-      } else {
-        const successMsg = document.createElement('div');
-        successMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-        successMsg.textContent = '✅ Terima kasih atas testimoni Anda! (Demo Mode)';
-        document.body.appendChild(successMsg);
-        setTimeout(() => successMsg.remove(), 3000);
-        document.getElementById('testimonialForm').reset();
-        selectedRating = 0;
-        updateStarDisplay();
-      }
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Kirim Testimoni 💬';
-    }
-
-    // Render Testimonials
-    function renderTestimonials(data) {
-      const testimonials = data.filter(item => item.type === 'testimonial');
-      const track = document.getElementById('testimonialTrack');
-      
-      if (testimonials.length === 0) {
-        track.innerHTML = `
-          <div class="w-full bg-white dark:bg-gray-800 rounded-3xl p-12 text-center">
-            <div class="text-6xl mb-4">💬</div>
-            <p class="text-gray-600 dark:text-gray-400">Belum ada testimoni. Jadilah yang pertama!</p>
-          </div>
-        `;
-        return;
-      }
-
-      track.innerHTML = testimonials.map(t => `
-        <div class="min-w-full bg-white dark:bg-gray-800 rounded-3xl p-8 card-shadow testimonial-card">
-          <div class="flex items-center space-x-4 mb-4">
-            <div class="bg-green-100 dark:bg-green-900 rounded-full w-16 h-16 flex items-center justify-center text-2xl">
-              👤
-            </div>
+    <!-- 2. BERANDA (HERO) -->
+    <section id="home" class="relative min-h-screen pt-40 pb-20 px-6 flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
             <div>
-              <h4 class="font-bold text-gray-800 dark:text-white">${t.name || 'Anonymous'}</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-400">${t.destination || 'Destinasi Wisata'}</p>
+                <div class="inline-block bg-pink-600 text-white px-5 py-2 rounded-lg font-black text-xs mb-6 uppercase tracking-widest shadow-md reveal-text">
+                    Professional Pharmacist 🩺
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black text-gray-900 mb-6 leading-tight reveal-text">
+                    Ajeng Tyas Putri, <span class="italic text-pink-600">S.Farm.</span>
+                </h1>
+                <div class="max-w-fit mb-10">
+                   <p class="text-xl text-gray-800 leading-relaxed font-medium typewriter">
+                        Dedikasi untuk keselamatan pasien ✨
+                   </p>
+                </div>
+                <div class="flex flex-wrap gap-5 reveal-text">
+                    <a href="#portfolio" class="btn-primary px-10 py-5 rounded-2xl font-black shadow-xl text-center text-lg">
+                        Lihat Portofolio 📁
+                    </a>
+                    <a href="#consultation" class="border-4 border-pink-600 text-pink-600 px-10 py-5 rounded-2xl font-black hover:bg-white transition-all text-center text-lg">
+                        Konsultasi Online 📱
+                    </a>
+                </div>
             </div>
-          </div>
-          <div class="mb-4">
-            ${'⭐'.repeat(t.rating || 5)}
-          </div>
-          <p class="text-gray-600 dark:text-gray-400 italic">"${t.message || ''}"</p>
-          <p class="text-xs text-gray-500 dark:text-gray-500 mt-4">
-            ${new Date(t.createdAt).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </p>
+            <div class="relative flex justify-center items-center reveal-text">
+                <span class="emoji-float top-0 left-0 floating" style="animation-delay: 0s;">💊</span>
+                <span class="emoji-float bottom-10 right-0 floating" style="animation-delay: 1s;">✨</span>
+                <span class="emoji-float top-20 right-10 floating" style="animation-delay: 0.5s;">🧪</span>
+                <span class="emoji-float bottom-20 left-10 floating" style="animation-delay: 1.5s;">🩺</span>
+                
+                <div class="relative z-10">
+                    <div class="w-80 h-80 md:w-[450px] md:h-[450px] rounded-[60px] bg-gradient-to-br from-pink-400 to-pink-700 floating shadow-2xl overflow-hidden border-[12px] border-white flex items-center justify-center">
+                        <!-- FOTO PROFIL UPDATE -->
+                        <img src="https://raw.githubusercontent.com/ajengtyasputri-sudo/Portofolio/refs/heads/main/WhatsApp%20Image%202026-01-29%20at%2021.14.03.jpeg" 
+                             alt="Ajeng Tyas Putri, S.Farm." 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
         </div>
-      `).join('');
+    </section>
 
-      updateTestimonialCarousel();
-    }
+    <!-- 3. TENTANG & ORGANISASI -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal-text">
+                    <h2 class="text-5xl font-black section-title mb-12">Tentang Saya 🧪</h2>
+                    <div class="bg-white/90 backdrop-filter backdrop-blur-sm p-10 rounded-[40px] border-l-8 border-pink-600 shadow-sm mb-8">
+                        <p class="text-xl text-gray-700 leading-relaxed font-medium">
+                            Sebagai lulusan <strong>Universitas Padjadjaran</strong> 🎓, saya berkomitmen untuk memberikan layanan farmasi yang berpusat pada pasien. Saya percaya bahwa edukasi obat adalah kunci utama kesehatan masyarakat. 💊
+                        </p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="p-6 pink-card flex-1 text-center">
+                            <h4 class="font-black text-pink-600 uppercase text-xs tracking-widest mb-1">Almamater</h4>
+                            <p class="font-bold text-gray-800">UNPAD 🏫</p>
+                        </div>
+                        <div class="p-6 pink-card flex-1 text-center">
+                            <h4 class="font-black text-pink-600 uppercase text-xs tracking-widest mb-1">Gelar</h4>
+                            <p class="font-bold text-gray-800">S.Farm. 📜</p>
+                        </div>
+                    </div>
+                </div>
 
-    // Update Testimonial Carousel
-    function updateTestimonialCarousel() {
-      const track = document.getElementById('testimonialTrack');
-      track.style.transform = `translateX(-${currentTestimonialIndex * 100}%)`;
-    }
+                <div class="reveal-text">
+                    <h2 class="text-5xl font-black section-title mb-12">Organisasi 🤝</h2>
+                    <div class="space-y-6">
+                        <div class="bg-white/90 p-6 rounded-3xl border-2 border-pink-100 hover:border-pink-500 transition-all shadow-sm">
+                            <h3 class="font-black text-pink-700 text-xl">Himpunan Mahasiswa Farmasi UNPAD 🏛️</h3>
+                            <p class="text-gray-500 font-bold text-sm mb-2 italic">Divisi Edukasi & Pengabdian</p>
+                            <p class="text-gray-600">Mengelola program penyuluhan kesehatan masyarakat mengenai bahaya resistensi antibiotik. 🦠</p>
+                        </div>
+                        <div class="bg-white/90 p-6 rounded-3xl border-2 border-pink-100 hover:border-pink-500 transition-all shadow-sm">
+                            <h3 class="font-black text-pink-700 text-xl">ISMAFARSI 🌏</h3>
+                            <p class="text-gray-500 font-bold text-sm mb-2 italic">Koordinator Wilayah</p>
+                            <p class="text-gray-600">Mengoordinasikan kegiatan advokasi profesi farmasis tingkat mahasiswa secara regional. 📢</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Handle Contact Submit
-    async function handleContactSubmit(e) {
-      e.preventDefault();
-      
-      const submitBtn = document.getElementById('contactSubmitBtn');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Mengirim...';
+    <!-- 4. KEAHLIAN -->
+    <section id="skills" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto reveal-text">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-black section-title">Keahlian Utama ⚡</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-10 pink-card text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="flask-conical" class="text-pink-600 w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">Farmasi Klinis</h3>
+                    <p class="text-gray-600 font-medium">Analisis interaksi obat, peninjauan resep, dan konseling pasien profesional. 🩺</p>
+                </div>
+                <div class="p-10 pink-card text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="message-circle" class="text-pink-600 w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">Edukasi & Konseling</h3>
+                    <p class="text-gray-600 font-medium">Komunikasi terapeutik untuk menjelaskan aturan pakai obat secara mudah. 📢</p>
+                </div>
+                <div class="p-10 pink-card text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="clipboard-list" class="text-pink-600 w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-black mb-4">Manajemen Obat</h3>
+                    <p class="text-gray-600 font-medium">Pengelolaan stok obat, penyimpanan rantai dingin, dan logistik farmasi. 📦</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      const formData = {
-        id: Date.now().toString(),
-        type: 'contact',
-        name: document.getElementById('contactName').value,
-        email: document.getElementById('contactFormEmail').value,
-        phone: '',
-        message: `${document.getElementById('contactSubject').value}: ${document.getElementById('contactFormMessage').value}`,
-        createdAt: new Date().toISOString()
-      };
+    <!-- 5. PORTOFOLIO -->
+    <section id="portfolio" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 reveal-text">
+                <h2 class="text-5xl font-black section-title">Karya & Proyek 🎨</h2>
+            </div>
+            <div class="max-w-4xl mx-auto reveal-text">
+                <div class="group pink-card overflow-hidden shadow-2xl bg-white/90">
+                    <div class="h-80 bg-pink-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&q=80&w=1000" alt="Edukasi Visual" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-12 text-center">
+                        <h3 class="text-3xl font-black text-gray-800 mb-4">Edukasi Penggunaan Obat Aman 🛡️</h3>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed font-medium">
+                            Kampanye visual edukatif untuk meminimalisir kesalahan penggunaan antibiotik. ⚠️
+                        </p>
+                        <a href="#" class="btn-primary px-10 py-4 rounded-xl inline-flex items-center gap-3">
+                            Detail <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      if (window.dataSdk) {
-        const result = await window.dataSdk.create(formData);
-        
-        if (result.isOk) {
-          const successMsg = document.createElement('div');
-          successMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-          successMsg.textContent = '✅ Pesan Anda telah terkirim! Kami akan segera menghubungi Anda.';
-          document.body.appendChild(successMsg);
-          setTimeout(() => successMsg.remove(), 3000);
-          document.getElementById('contactForm').reset();
-        } else {
-          const errorMsg = document.createElement('div');
-          errorMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-          errorMsg.textContent = '❌ Terjadi kesalahan. Silakan coba lagi.';
-          document.body.appendChild(errorMsg);
-          setTimeout(() => errorMsg.remove(), 3000);
+    <!-- 6. KONSULTASI ONLINE -->
+    <section id="consultation" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto reveal-text">
+                <div class="pink-card p-10 shadow-2xl bg-white/95 border-4 border-pink-50">
+                    <h2 class="text-3xl font-black text-center mb-8 text-pink-600">Konsultasi Obat 📱</h2>
+                    <form class="space-y-6">
+                        <input type="text" placeholder="Nama Anda 😊" class="w-full border-2 border-pink-100 rounded-2xl p-4 font-bold focus:border-pink-500 outline-none transition-all">
+                        <textarea rows="4" placeholder="Pertanyaan obat Anda... ✍️" class="w-full border-2 border-pink-100 rounded-2xl p-4 font-bold focus:border-pink-500 outline-none transition-all"></textarea>
+                        <button type="submit" class="w-full btn-primary py-5 rounded-2xl font-black text-xl shadow-lg">Kirim Pesan ✨</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. KONTAK -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-pink-600 rounded-[60px] p-12 md:p-24 text-white flex flex-col md:flex-row gap-16 items-center shadow-xl relative overflow-hidden reveal-text">
+                <div class="md:w-1/2 relative z-10">
+                    <h2 class="text-5xl font-black mb-8 leading-tight">Mari Terhubung! 👋</h2>
+                    <div class="space-y-6">
+                        <p class="text-xl font-bold">ajengtyasputri@gmail.com ✉️</p>
+                        <p class="text-xl font-bold">@ajengtys.putrii_ 📸</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="py-20 bg-white/70 border-t-4 border-pink-200 relative z-10 text-center">
+        <div class="text-3xl font-black text-pink-600 mb-4 uppercase tracking-tighter">AJENG TYAS PUTRI, S.Farm.</div>
+        <div class="text-gray-500 font-bold text-[10px]">
+            &copy; 2026 Portofolio Farmasi | Universitas Padjadjaran 🏫
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Background Emojis
+        const emojiContainer = document.getElementById('emoji-background');
+        const emojis = ['💊', '🧪', '🧬', '🩹', '🩺', '✨'];
+        const emojiCount = 35; 
+
+        for (let i = 0; i < emojiCount; i++) {
+            const emojiEl = document.createElement('div');
+            emojiEl.className = 'bg-pill';
+            emojiEl.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const size = 1.5 + Math.random() * 1.5;
+            const delay = Math.random() * 10;
+            const duration = 15 + Math.random() * 15;
+
+            emojiEl.style.top = `${top}%`;
+            emojiEl.style.left = `${left}%`;
+            emojiEl.style.fontSize = `${size}rem`;
+            emojiEl.style.animationDelay = `-${delay}s`;
+            emojiEl.style.animationDuration = `${duration}s`;
+            
+            emojiContainer.appendChild(emojiEl);
         }
-      } else {
-        const successMsg = document.createElement('div');
-        successMsg.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-        successMsg.textContent = '✅ Pesan Anda telah terkirim! (Demo Mode)';
-        document.body.appendChild(successMsg);
-        setTimeout(() => successMsg.remove(), 3000);
-        document.getElementById('contactForm').reset();
-      }
 
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Kirim Pesan 📨';
-    }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
 
-    // Chatbot Functions
-    function handleChatbotSubmit(e) {
-      e.preventDefault();
-      const input = document.getElementById('chatbotInput');
-      const message = input.value.trim();
-      
-      if (message) {
-        addChatMessage(message, 'user');
-        input.value = '';
-        
-        setTimeout(() => {
-          const response = getChatbotResponse(message);
-          addChatMessage(response, 'bot');
-        }, 500);
-      }
-    }
-
-    function sendQuickReply(message) {
-      addChatMessage(message, 'user');
-      setTimeout(() => {
-        const response = getChatbotResponse(message);
-        addChatMessage(response, 'bot');
-      }, 500);
-    }
-
-    function addChatMessage(message, sender) {
-      const messagesContainer = document.getElementById('chatbotMessages');
-      const messageDiv = document.createElement('div');
-      
-      if (sender === 'user') {
-        messageDiv.className = 'flex justify-end';
-        messageDiv.innerHTML = `
-          <div class="bg-green-600 text-white rounded-2xl p-4 max-w-[80%]">
-            <p>${message}</p>
-          </div>
-        `;
-      } else {
-        messageDiv.className = 'flex items-start space-x-3';
-        messageDiv.innerHTML = `
-          <div class="bg-green-100 dark:bg-green-900 rounded-full p-2 text-2xl">🤖</div>
-          <div class="bg-gray-100 dark:bg-gray-700 rounded-2xl p-4 max-w-[80%]">
-            <p class="text-gray-800 dark:text-white">${message}</p>
-          </div>
-        `;
-      }
-      
-      messagesContainer.appendChild(messageDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    function getChatbotResponse(message) {
-      const lower = message.toLowerCase();
-      
-      if (lower.includes('harga') || lower.includes('tiket')) {
-        return 'Harga tiket berkisar:\n🌿 Curug Cibareubeuy: Rp 15.000\n⛰️ Curug Cileat: Rp 20.000\n🏕️ Curug Capolaga: Rp 25.000';
-      } else if (lower.includes('jam') || lower.includes('buka') || lower.includes('operasional')) {
-        return 'Jam operasional:\n⏰ Senin-Jumat: 07.00-17.00 WIB\n⏰ Sabtu-Minggu: 06.00-18.00 WIB';
-      } else if (lower.includes('rute') || lower.includes('lokasi') || lower.includes('cara')) {
-        return 'Semua curug dapat diakses dari pusat kota Subang:\n📍 Cibareubeuy: 15 km (30 menit)\n📍 Cileat: 22 km (1 jam)\n📍 Capolaga: 18 km (45 menit)\n\nGunakan Google Maps untuk navigasi!';
-      } else if (lower.includes('fasilitas')) {
-        return 'Fasilitas yang tersedia: Parkir, toilet, mushola, warung makan, area istirahat, dan guide profesional (untuk Cileat).';
-      } else {
-        return 'Terima kasih atas pertanyaan Anda! Untuk informasi lebih detail, silakan hubungi kami di +62 812-3456-7890 atau klik tombol quick reply di bawah. 😊';
-      }
-    }
-
-    // Initialize on load
-    init();
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a18b325615ffdff',t:'MTc2MzY0OTU5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html><!-- 📸 TARUH FOTO DI SINI (Curug Cibareubeuy) --><!-- Hapus kode SVG di bawah, lalu ganti dengan: --><!-- <img src="https://URL-FOTO-CIBAREUBEUY-ANDA.jpg" alt="Curug Cibareubeuy" class="w-full h-64 object-cover"> --><!-- 📸 TARUH FOTO DI SINI (Curug Cileat) --><!-- Hapus kode SVG di bawah, lalu ganti dengan: --><!-- <img src="https://URL-FOTO-CILEAT-ANDA.jpg" alt="Curug Cileat" class="w-full h-64 object-cover"> --><!-- 📸 TARUH FOTO DI SINI (Curug Capolaga) --><!-- Hapus kode SVG di bawah, lalu ganti dengan: --><!-- <img src="https://URL-FOTO-CAPOLAGA-ANDA.jpg" alt="Curug Capolaga" class="w-full h-64 object-cover"> -->
+        document.querySelectorAll('.reveal-text').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
